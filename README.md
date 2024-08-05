@@ -1,4 +1,4 @@
- :earth_africa: # Handling Geospatial Vectors with R/Manejo de Vectores Geoespaciales con R :world_map:
+ # Handling Geospatial Vectors with R/Manejo de Vectores Geoespaciales con R :world_map:  :earth_africa:
 
 
 # Description
