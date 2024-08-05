@@ -13,10 +13,10 @@ This is a practice and review project, in which I focus on reviewing the basic c
 
 The first thing to do is install the sf library
 
-´install.packages("sf")´
+`install.packages("sf")`
 
 Then you must start the sf library
-´library(sf)´
+`library(sf)`
 
 On the other hand, in this project the shp data from the page is being used
  ¡[Spatial data](https://www.naturalearthdata.com/downloads/)
@@ -34,10 +34,10 @@ Este es un proyecto de practica y repaso, en el cual me enfoco en repasar los co
 
 Lo primero  realizar es instalar la libreria sf
 
-´install.packages("sf")´
+`install.packages("sf")`
 
 Despues debe iniciar la libreria sf
- ´library(sf)´
+ `library(sf)`
 
  Por otro lado, en este proyecto se esta usando los datos shp de la pagina
  ¡[Datos epaciales](https://www.naturalearthdata.com/downloads/)
