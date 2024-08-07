@@ -77,5 +77,30 @@ geometrias <- st_sfc( poligono, linea, punto1, punto2)
 plot(geometrias, col = c('red', 'blue', 'green', 'yellow'))
 
 
+#########################################################################################################
+
+# Visualizacion de datos meuse
+library(sp)
+
+help(meuse) #para mas informacion sobre el dataset
+
+data(meuse, package="sp")#aqui podremos ver como puntos las medidas de metales pesados cerca de un rio
+meuse_sf <- st_as_sf(meuse, coords = c("x", "y"), crs = 28992, agr = "constant")
+
+data(meuse.riv, package="sp")
+str(meuse.riv) #aqui podemos ver los vectores relacionados al rio
+meuse_riv <- st_sfc(st_polygon(list(meuse.riv)), crs = 28992)
+
+data(meuse.grid, package="sp") #con esto podremos vizualizar la regilla de los datos
+meuse_grid <- st_as_sf(meuse.grid, coords = c("x", "y"), 
+                       crs = 28992, agr = "constant")
+
+plot(meuse_sf["zinc"], pch = 16, cex = 1.5, main = "",
+     breaks = "quantile", key.pos = 4, reset = FALSE)
+
+plot(meuse_riv, col = "lightblue", add = TRUE)
+
+plot(st_geometry(meuse_grid), pch = 3, cex = 0.2, col = "lightgray", add = TRUE)
 
 
+help(aquifer.RData)
