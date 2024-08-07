@@ -44,9 +44,6 @@ plot(cprov)
 
 
 
-line <- st_linestring(x = matrix(numeric(0), 0, 2), dim = "XYZ")
-cprov2 <- st_sf(names = c('Coruña (A)'),
-               geom = line)
 
-plot(line)
-help(st_linestring)
+
+
