@@ -42,7 +42,39 @@ cprov <- st_sf(names = c('Coruña (A)', 'Lugo', 'Ourense', 'Pontevedra'),habitan
                geom = sfc)
 plot(cprov)
 
+########################################################################################################
+# Ejercicio 2.1 (Creación de una columna de geometrías) Crear una geometría (un objeto sfc) formada por: dos puntos en las posiciones (1,5) y (5,5), una línea entre los puntos (1,1) y (5,1), y un polígono, con vértices {(0,0), (6,0), (6,6), (0,6), (0,0)} y con un agujero con vértices {(2,2), (2,4), (4,4), (4,2), (2,2)}
 
+## Los puntos 
+punto1 <- st_point(c(1, 5))
+punto2 <- st_point(c(5, 5))
+sfc2 <- st_sfc(list(punto1, punto2))
+cprov2 <- st_sf(names = c('uno', 'dos'), 
+               geom = sfc2)
+plot(cprov2)
+
+
+## la linea
+
+linea <- st_linestring(rbind(c(1, 1), c(5, 1)))
+plot(linea)
+
+## poligono con agujero interno
+
+poligono_exterior <- st_polygon(list(rbind( c(0, 0), c(6, 0), c(6, 6), c(0, 6), c(0, 0))))
+poligono_agujero <- st_polygon(list(rbind(  c(2, 2), c(2, 4), c(4, 4), c(4, 2), c(2, 2))))
+
+
+poligono <- st_polygon(list(rbind(c(0, 0), c(6, 0), c(6, 6), c(0, 6), c(0, 0)),
+                            rbind(c(2, 2), c(2, 4), c(4, 4), c(4, 2), c(2, 2))))
+
+plot(poligono)
+
+
+## Vizualizar todas las geometrias creadas en un solo ambiente
+geometrias <- st_sfc( poligono, linea, punto1, punto2)
+
+plot(geometrias, col = c('red', 'blue', 'green', 'yellow'))
 
 
 
