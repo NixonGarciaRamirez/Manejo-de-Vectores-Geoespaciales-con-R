@@ -104,3 +104,12 @@ plot(st_geometry(meuse_grid), pch = 3, cex = 0.2, col = "lightgray", add = TRUE)
 
 
 help(aquifer.RData)
+
+###############################################################################################
+#### 2.2.1 Sistemas de referencia de coordenadas ####
+
+#Lo primero que se recalca es entender la diferencia entre 
+#coordenadas geodesicas y proyectadas
+
+# Como identificar el CRS  de un shapefile
+sf::st_crs(shp)
