@@ -113,3 +113,37 @@ help(aquifer.RData)
 
 # Como identificar el CRS  de un shapefile
 sf::st_crs(shp)
+
+
+################################################################################################
+#### 2.3 Representación de datos espaciales ####
+
+library(viridis)
+plot(x = nc[c("SID74", "SID79" ,"BIR79")],max.plot = 2
+     , pal = viridis, border = 'grey70', logz = TRUE, 
+     breaks = seq(0, 4, len = 10), at = c(0, 0.5, 1, 1.5, 2,2.5,3,3.5,4), 
+     key.pos = 1, key.width = lcm(1.2), key.length = 0.8) 
+
+help(viridis)
+
+# Creacon de mapas tematico usando tmap
+
+install.packages("tmap")
+library(tmap)
+
+#los datos los ponemos en tm_shape , pero la secuancia mediante la cual se optendran los
+#colores se saca basandose en el numero de clases que tenga 
+
+
+tm_shape(nc) + tm_polygons("SID79")
+tmap_mode("view")#con view se activa el modo interactivo
+tmap_last()
+
+tm_shape(shp) + tm_polygons("longitude")
+tmap_mode(mode = "plot") #aqui se activa el modo de mapas interactivos
+tmap_last() #esta linea solo se usa si necesitamos reactivar las ultimas modificaciones o cracteriscias del mapa
+
+# Esta es una version mejorada para crear mapas interactivos
+library(mapview)
+mapview(nc, zcol = "SID79") # solo necesita los datos shape , la columna con la que se establecera la paleta de colores, y dentro de este programa ya se establecen los datos extras de la tabla de atributos de la misma
+
