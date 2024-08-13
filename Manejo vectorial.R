@@ -163,3 +163,23 @@ nc_sf <- st_read(file) #Lee un archivo GDAL
 
 drivers <- st_drivers() #Obtenga una lista de los controladores GDAL disponibles
 str(drivers)
+
+
+### Demostracion de como acceder a datos espaciales empleando R ###
+library(httr)
+library(osmdata) 
+library(rlang)
+# Cuidado: descarga mucha información
+# https://nominatim.openstreetmap.org/ui/search.html
+# https://wiki.openstreetmap.org/wiki/Map_features
+
+
+osm_coru <- opq('A Coruña')
+
+osm_coru <- opq('A Coruña') %>%
+  add_osm_feature(key = 'highway') %>%
+  osmdata_sf() 
+
+
+plot(st_geometry(osm_coru$osm_lines), main = "", 
+     xlim = c(-8.45, -8.38), ylim = c(43.32, 43.39))
