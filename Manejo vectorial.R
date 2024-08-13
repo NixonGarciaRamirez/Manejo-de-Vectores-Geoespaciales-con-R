@@ -147,3 +147,19 @@ tmap_last() #esta linea solo se usa si necesitamos reactivar las ultimas modific
 library(mapview)
 mapview(nc, zcol = "SID79") # solo necesita los datos shape , la columna con la que se establecera la paleta de colores, y dentro de este programa ya se establecen los datos extras de la tabla de atributos de la misma
 
+
+################################################################################################
+#### 2.4 Operaciones con datos espaciales ####
+
+
+dir <- system.file("shape", package="sf")
+list.files(dir, pattern="^[nc]")
+
+# ESRI Shapefile, consta de por lo menos de 3 ficheros, el principal .shp
+file <- paste0(dir, "/nc.shp") #con esto puedo saber donde se guarda los shp
+file #Esto tambien se puede usar en teoria cuando se necesite ingresar la direccion de un archivo
+
+nc_sf <- st_read(file)
+
+drivers <- st_drivers()
+str(drivers)
