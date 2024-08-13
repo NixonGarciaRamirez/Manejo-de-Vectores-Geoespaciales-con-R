@@ -159,7 +159,7 @@ list.files(dir, pattern="^[nc]")
 file <- paste0(dir, "/nc.shp") #con esto puedo saber donde se guarda los shp
 file #Esto tambien se puede usar en teoria cuando se necesite ingresar la direccion de un archivo
 
-nc_sf <- st_read(file)
+nc_sf <- st_read(file) #Lee un archivo GDAL
 
-drivers <- st_drivers()
+drivers <- st_drivers() #Obtenga una lista de los controladores GDAL disponibles
 str(drivers)
