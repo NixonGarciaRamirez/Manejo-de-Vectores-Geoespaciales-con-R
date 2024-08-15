@@ -181,5 +181,101 @@ osm_coru <- opq('A Coruña') %>%
   osmdata_sf() 
 
 
+############################################################
+# Acceder a cartografia basica de paises
+install.packages("rnaturalearth")
+library(rnaturalearth)
+
+# world countries
+plot(ne_countries())
+
+# Colombia
+plot(ne_countries(country = "Colombia"))
+
+
+
+#############################################################
+
+# Datos metereologicos
+
+# Un punto negativo es que este solo analiza datos metereologicos de españa
+
+install.packages("climaemet")
+library(climaemet)
+
+## Get api key from AEMET
+browseURL("https://opendata.aemet.es/centrodedescargas/obtencionAPIKey")
+
+## Use this function to register your API Key temporarly or permanently
+aemet_api_key("Aqui se agrega la llave necesaria")
+
+aemet_last_obs("9434")#ver las ultimas observaciones de la estacion
+
+## Obtener una estacion
+stations <- aemet_stations() # Need to have the API Key registered
+
+knitr::kable(head(stations))
+
+
+# Tmabien podemos hacer el ejercicio con el numero de la estacion
+station <- "9434" # Zaragoza Aeropuerto
+
+## Get last observation values for a station
+data_observation <- aemet_last_obs(station)
+
+knitr::kable(head(data_observation))
+
+# Se pueden filtrar la informacion segun las fechas
+data_daily <- aemet_daily_clim(station,
+                               start = "2022-01-01",
+                               end = "2022-06-30"
+)
+
+knitr::kable(head(data_daily))
+
+#Tambien se puede obtener los valores anuales o mensuales para la estacion
+data_monthly <- aemet_monthly_clim(station, year = 2022)
+knitr::kable(head(data_monthly))
+
+
+#Se puede seleccionar que tipo de dato se esta buscando
+data_extremes <- aemet_extremes_clim(station, parameter = "T")
+knitr::kable(head(data_extremes))
+
+
+#Empleando la libreria ggplot2  tambien podemos graficar los datos
+
+library(ggplot2)
+
+
+temp_data <- climaemet::climaemet_9434_temp
+
+ggstripes(temp_data, plot_title = "Zaragoza Airport")
+
+
+# Tambien  se puede realizar una serie de tiempo con la informacion de la estacion
+
+wl_data <- climaemet::climaemet_9434_climatogram
+
+ggclimat_walter_lieth(wl_data,
+                      alt = "249", per = "1981-2010",
+                      est = "Zaragoza Airport"
+)
+
+
+#Ademas de eso tambien se puede realizar una rosa de los vientos
+wind_data <- climaemet::climaemet_9434_wind
+
+speed <- wind_data$velmedia
+direction <- wind_data$dir
+
+ggwindrose(
+  speed = speed, direction = direction,
+  speed_cuts = seq(0, 16, 4), legend_title = "Wind speed (m/s)",
+  calm_wind = 0, n_col = 1, plot_title = "Zaragoza Airport"
+) 
+
+
+
 plot(st_geometry(osm_coru$osm_lines), main = "", 
      xlim = c(-8.45, -8.38), ylim = c(43.32, 43.39))
